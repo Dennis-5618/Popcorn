@@ -16,6 +16,6 @@ module.exports = {
         await message.delete();
         await message.channel.bulkDelete(usable);
 
-        message.channel.send(`Successfully deleted \`${args[0]}\` messages`).then(msg => { msg.delete({ timeout: 5000 }) });
+        message.channel.send(`Successfully deleted \`${args[0]}\` messages`).then(msg => { msg.delete({ timeout: 3000 }) });
     }
-}
+};

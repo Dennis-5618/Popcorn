@@ -15,7 +15,7 @@ module.exports = {
 
             return message.channel.send(new MessageEmbed()
                 .setColor("#ff6666")
-                .setDescription(`${User.tag} has been unbanned by ${message.author.tag}`)
+                .setDescription(`${User.tag} has been unbanned by ${message.author}`)
             );
 
         } catch {
