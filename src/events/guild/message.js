@@ -1,9 +1,9 @@
 module.exports = {
     name: "message",
     run: async (client, message) => {
-        if (message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(".")) return;
+        if (message.author.bot || !message.guild || !message.content.toLowerCase().startsWith("p!")) return;
 
-        const [cmd, ...args] = message.content.trim().slice(".".length).split(/ +/g);
+        const [cmd, ...args] = message.content.trim().slice("p!".length).split(/ +/g);
         const command = client.commands.get(cmd.toLowerCase()) || client.commands.get(client.aliases.get(cmd.toLowerCase()));
         if (!command) return;
 

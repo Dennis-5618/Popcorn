@@ -21,7 +21,7 @@ module.exports = {
                 .setDescription(`You have been kicked from \`${message.guild.name}\` \nReason: \`${Reason}\``)
             );
 
-            await message.guild.members.kick(Reason);
+            await User.kick(Reason);
 
             return message.channel.send(new MessageEmbed()
                 .setColor("#ff6666")

@@ -7,15 +7,14 @@ module.exports = {
     userPermissions: ["BAN_MEMBERS"],
     botPermissions: ["BAN_MEMBERS"],
     run: async (client, message, args) => {
-        const User = message.guild.members.cache.get(args[0]);
-        if (!User) return message.channel.send("I couldn't find that user");
+        if (!args[0]) return message.channel.send("You need to provide the ID of the user you want to unban");
 
         try {
-            await message.guild.members.unban(User);
+            await message.guild.members.unban(args[0]);
 
             return message.channel.send(new MessageEmbed()
                 .setColor("#ff6666")
-                .setDescription(`${User.tag} has been unbanned by ${message.author}`)
+                .setDescription(`\`${args[0]}\` has been unbanned by ${message.author}`)
             );
 
         } catch {

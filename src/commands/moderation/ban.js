@@ -22,12 +22,11 @@ module.exports = {
                 .setDescription(`You have been banned from \`${message.guild.name}\` \nReason: \`${Reason}\``)
             ).catch(() => null);
 
-            await message.guild.members.ban(User.id, { reason: Reason, days: 7 });
-
-            return message.channel.send(new MessageEmbed()
+            await message.channel.send(new MessageEmbed()
                 .setColor("#ff6666")
                 .setDescription(`\`${User.tag}\` has been banned by ${message.author} \nReason: \`${Reason}\``)
             );
+            return message.guild.members.ban(User.id, { reason: Reason, days: 7 });
 
         } catch {
             message.channel.send("An error has occured while trying to ban the mentioned user, please try again")
