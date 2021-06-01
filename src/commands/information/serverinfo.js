@@ -41,4 +41,4 @@ module.exports = {
             .setFooter(`Server creation date: ${new Date(message.guild.createdTimestamp)}`)
         );
     }
-}
+};
