@@ -12,6 +12,7 @@ module.exports = {
         Prefix: \`p!\`
         Server count: \`${client.guilds.cache.size.toLocaleString()}\`
         User count: \`${client.users.cache.size.toLocaleString()}\`
+        Command count: \`${client.commands.size}\`
 
         > **System information**
         Memory usage: \`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB\`

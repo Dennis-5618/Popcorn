@@ -4,8 +4,9 @@ const { promisify } = require("util");
 const glob = require("glob");
 
 const globPromise = promisify(glob);
-
 const client = new Client({ ws: { intents: Intents.ALL } });
+
+client.categories = new Set();
 
 client.events = new Collection();
 client.commands = new Collection();
@@ -23,6 +24,7 @@ client.aliases = new Collection();
     commandFiles.map((value) => {
         const file = require(value);
         client.commands.set(file.name, file);
+        client.categories.add(file.category);
         if (file.aliases) {
             file.aliases.map((value) => client.aliases.set(value, file.name));
         };
