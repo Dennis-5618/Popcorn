@@ -1,10 +1,17 @@
 const { Client, Collection, Intents } = require("discord.js");
-const { token } = require("../config.json");
+const { token, database } = require("../config.json");
 const { promisify } = require("util");
+const mongoose = require("mongoose");
 const glob = require("glob");
 
 const globPromise = promisify(glob);
 const client = new Client({ ws: { intents: Intents.ALL } });
+
+mongoose.connect(database, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+});
 
 client.categories = new Set();
 

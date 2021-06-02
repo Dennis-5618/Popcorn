@@ -6,6 +6,7 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "glob": "^7.1.7",
+    "mongoose": "^5.12.12",
     "ms": "^2.1.3"
   }
 }
