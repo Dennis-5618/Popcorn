@@ -23,12 +23,12 @@ module.exports = {
         }, { upsert: true });
 
         User.send(new MessageEmbed()
-        .setColor("#ff6666")
+        .setColor("#8989ff")
         .setDescription(`You have been warned in ${message.guild.name} by ${message.author} \nReason: \`${Reason}\``)
         );
 
         return message.channel.send(new MessageEmbed()
-        .setColor("#ff6666")
+        .setColor("#8989ff")
         .setDescription(`${User} has been warned by ${message.author} \nReason: \`${Reason}\``)
         );
     }

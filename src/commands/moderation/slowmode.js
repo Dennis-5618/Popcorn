@@ -13,7 +13,7 @@ module.exports = {
 
         await message.channel.setRateLimitPerUser(args[0]);
         return message.channel.send(new MessageEmbed()
-            .setColor("#ff6666")
+            .setColor("#8989ff")
             .setDescription(`Slowmode has now been set in this channel to ${args[0]} seconds`)
         );
     }

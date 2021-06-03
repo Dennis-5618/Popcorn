@@ -18,7 +18,7 @@ module.exports = {
         });
 
         return message.channel.send(new MessageEmbed()
-            .setColor("#ff6666")
+            .setColor("#8989ff")
             .setDescription(`You have successfully created ${message.guild.roles.cache.find(r => r.name == Role)}`)
         );
     }

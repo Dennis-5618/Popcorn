@@ -16,7 +16,7 @@ module.exports = {
 
         try {
             await message.channel.send(new MessageEmbed()
-                .setColor("#ff6666")
+                .setColor("#8989ff")
                 .setDescription(`${message.author} has changed ${User}'s nickname to: \`${Nickname}\``)
             );
 

@@ -17,14 +17,14 @@ module.exports = {
 
         try {
             await User.send(new MessageEmbed()
-                .setColor("#ff6666")
+                .setColor("#8989ff")
                 .setDescription(`You have been kicked from \`${message.guild.name}\` \nReason: \`${Reason}\``)
             );
 
             await User.kick(Reason);
 
             return message.channel.send(new MessageEmbed()
-                .setColor("#ff6666")
+                .setColor("#8989ff")
                 .setDescription(`\`${User.tag}\` has been kicked by ${message.author} \nReason: \`${Reason}\``)
             );
 

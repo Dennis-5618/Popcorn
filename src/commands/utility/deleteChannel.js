@@ -12,7 +12,7 @@ module.exports = {
         try {
             await Channel.delete();
             message.channel.send(new MessageEmbed()
-                .setColor("#ff6666")
+                .setColor("#8989ff")
                 .setTitle("Channel deleted")
                 .setDescription(`You have succesfully deleted \`${Channel.name}\``))
         } catch {

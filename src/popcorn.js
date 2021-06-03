@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const glob = require("glob");
 
 const globPromise = promisify(glob);
-const client = new Client({ ws: { intents: Intents.ALL } });
+const client = new Client({ ws: { intents: Intents.ALL }, partials: ["CHANNEL", "MESSAGE", "REACTION"] });
 
 mongoose.connect(database, {
     useNewUrlParser: true,

@@ -6,7 +6,7 @@ module.exports = {
     description: "Shows some statistics of the bot",
     run: async (client, message) => {
         message.channel.send(new MessageEmbed()
-            .setColor("#ff6666")
+            .setColor("#8989ff")
             .setDescription(`
         > **Bot information**
         Prefix: \`p!\`

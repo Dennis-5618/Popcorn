@@ -17,12 +17,12 @@ module.exports = {
 
         try {
             await User.send(new MessageEmbed()
-                .setColor("#ff6666")
+                .setColor("#8989ff")
                 .setDescription(`You have been softbanned from \`${message.guild.name}\` by \`${message.author.tag}\` \nReason: \`${Reason}\``)
             );
 
             await message.channel.send(new MessageEmbed()
-                .setColor("#ff6666")
+                .setColor("#8989ff")
                 .setDescription(`\`${User.tag}\` has been softbanned by ${message.author} \nReason: \`${Reason}\``)
             );
 

@@ -12,7 +12,7 @@ module.exports = {
         const verificationLevel = { NONE: "none", LOW: "low", MEDIUM: "medium", HIGH: "high", VERY_HIGH: "very high" };
 
         message.channel.send(new MessageEmbed()
-            .setColor("#ff6666")
+            .setColor("#8989ff")
             .setThumbnail(message.guild.iconURL({ dynamic: true }))
             .setDescription(`
             > **General information**
