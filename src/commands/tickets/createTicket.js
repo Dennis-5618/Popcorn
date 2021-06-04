@@ -9,6 +9,7 @@ module.exports = {
     userPermissions: ["ADMINISTRATOR"],
     botPermissions: ["MANAGE_CHANNELS"],
     run: async (client, message) => {
+        // Fetching the data from MongoDB
         const data = await tickets.findOne({ Guild: message.guild.id });
         if (data && data.Info?.length >= 10) return message.channel.send("You have reached the maximum amount of tickets allowed");
 
@@ -35,7 +36,7 @@ module.exports = {
                 const channelCollector = new MessageCollector(message.channel, m => m.author.id == message.author.id, { time: 30000 });
                 channelCollector.on("collect", async msg => {
 
-                    const channel = message.mentions.channels.first() || message.guild.channels.cache.find(c => c.type == "text" && c.id == msg.content);
+                    const channel = msg.mentions.channels.first() || message.guild.channels.cache.find(c => c.type == "text" && c.id == msg.content);
                     if (!channel) return message.channel.send("I couldn't find that channel, please try again");
                     else {
                         channelCollector.stop();
@@ -48,20 +49,10 @@ module.exports = {
                         const roleCollector = new MessageCollector(message.channel, m => m.author.id == message.author.id, { time: 30000 });
                         roleCollector.on("collect", async msg => {
 
-                            const role = message.mentions.roles.first() || message.guild.roles.cache.find(r => r.id == msg.content);
+                            const role = msg.mentions.roles.first() || message.guild.roles.cache.find(r => r.id == msg.content);
                             if (!role) return message.channel.send("I coudn't find that role, please try again");
                             else {
                                 roleCollector.stop();
-
-                                await tickets.updateOne({ Guild: message.guild.id }, {
-                                    $push: {
-                                        Info: [{
-                                            Category: category.id,
-                                            Channel: channel.id,
-                                            Role: role.id
-                                        }]
-                                    }
-                                }, { upsert: true });
 
                                 await message.channel.send(embed
                                     .setTitle("Setup complete!")
@@ -70,6 +61,17 @@ module.exports = {
 
                                 const ticket = await channel.send(embed.setDescription("React with ✉ below to open a ticket"));
                                 ticket.react("✉");
+
+                                await tickets.updateOne({ Guild: message.guild.id }, {
+                                    $push: {
+                                        Info: [{
+                                            Category: category.id,
+                                            Channel: channel.id,
+                                            Role: role.id,
+                                            Message: ticket.id
+                                        }]
+                                    }
+                                }, { upsert: true });
                             };
                         });
                     };
