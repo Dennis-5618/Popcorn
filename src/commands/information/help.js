@@ -6,7 +6,7 @@ module.exports = {
     category: "information",
     description: "returns a list of all commands or information about a specific one",
     run: async (client, message, args) => {
-        const Embed = new MessageEmbed().setColor("#8989ff");
+        const Embed = new MessageEmbed().setColor("#5865F2");
 
         if (!args.length) {
             message.channel.send(Embed.setDescription(`

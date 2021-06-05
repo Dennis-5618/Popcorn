@@ -9,7 +9,7 @@ module.exports = {
 
         const channel = message.guild.channels.cache.get("849594107965210624");
         await channel.send(new MessageEmbed()
-            .setColor("#8989ff")
+            .setColor("#5865F2")
             .setTitle("Suggestion")
             .setDescription(`
         Author: \`${message.author.tag}\`
@@ -19,7 +19,7 @@ module.exports = {
         );
 
         return message.channel.send(new MessageEmbed()
-            .setColor("#8989ff")
+            .setColor("#5865F2")
             .setDescription("Thank you for your suggestion! I have sent it to my developer")
         );
     }

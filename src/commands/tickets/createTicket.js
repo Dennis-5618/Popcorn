@@ -13,7 +13,7 @@ module.exports = {
         const data = await tickets.findOne({ Guild: message.guild.id });
         if (data && data.Info?.length >= 10) return message.channel.send("You have reached the maximum amount of tickets allowed");
 
-        const embed = new MessageEmbed().setColor("#8989ff");
+        const embed = new MessageEmbed().setColor("#5865F2");
 
         message.channel.send(embed
             .setTitle("Ticket setup (1/3)")

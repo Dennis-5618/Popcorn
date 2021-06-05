@@ -10,7 +10,7 @@ module.exports = {
         const Roles = User.roles.cache.sort((a, b) => b.position - a.position).map(r => r.toString()).slice(0, -1);
 
         return message.channel.send(new MessageEmbed()
-            .setColor("#8989ff")
+            .setColor("#5865F2")
             .setThumbnail(User.user.avatarURL({ dynamic: true, size: 512 }))
             .setDescription(`
             > **User information**

@@ -20,7 +20,7 @@ module.exports = {
         await User.roles.add(Role);
 
         return message.channel.send(new MessageEmbed()
-            .setColor("#8989ff")
+            .setColor("#5865F2")
             .setDescription(`${message.author} has given ${User} the role ${Role}`)
         );
     }

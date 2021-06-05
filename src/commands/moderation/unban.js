@@ -13,7 +13,7 @@ module.exports = {
             await message.guild.members.unban(args[0]);
 
             return message.channel.send(new MessageEmbed()
-                .setColor("#8989ff")
+                .setColor("#5865F2")
                 .setDescription(`\`${args[0]}\` has been unbanned by ${message.author}`)
             );
 

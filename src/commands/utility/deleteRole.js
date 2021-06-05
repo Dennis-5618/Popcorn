@@ -13,7 +13,7 @@ module.exports = {
         await Role.delete();
 
         return message.channel.send(new MessageEmbed()
-            .setColor("#8989ff")
+            .setColor("#5865F2")
             .setDescription(`You have successfully deleted the role: \`${Role.name}\``)
         );
     }

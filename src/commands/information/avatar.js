@@ -6,7 +6,7 @@ module.exports = {
     category: "information",
     description: "sends the avatar of yourself or the mentioned user",
     run: async (client, message, args) => {
-        const Embed = new MessageEmbed().setColor("#8989ff");
+        const Embed = new MessageEmbed().setColor("#5865F2");
         const User = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 
         if (!args.length) {

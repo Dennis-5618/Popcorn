@@ -14,7 +14,7 @@ module.exports = {
         const data = await tickets.findOne({ Guild: message.guild.id });
         if (!data || !data.Info) return message.channel.send("There are no active tickets in this server, you can create one using \`p!createticket\`");
         else {
-            const embed = new MessageEmbed().setColor("8989ff").setTitle("Ticket list");
+            const embed = new MessageEmbed().setColor("5865F2").setTitle("Ticket list");
 
             // Looping through all of the tickets
             for (const info of data.Info) {

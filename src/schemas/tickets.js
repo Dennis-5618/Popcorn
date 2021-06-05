@@ -5,4 +5,4 @@ const ticketSchema = mongoose.Schema({
     Info: { type: Array, required: true }
 });
 
-module.exports = mongoose.model("Tickets", ticketSchema)
+module.exports = mongoose.model("Tickets", ticketSchema);

@@ -18,6 +18,7 @@ client.categories = new Set();
 client.events = new Collection();
 client.commands = new Collection();
 client.aliases = new Collection();
+client.cooldowns = new Collection();
 
 (async () => {
     const eventFiles = await globPromise(`${__dirname}/events/**/*.js`);

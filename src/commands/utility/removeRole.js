@@ -19,7 +19,7 @@ module.exports = {
         await User.roles.remove(Role);
 
         return message.channel.send(new MessageEmbed()
-            .setColor("#8989ff")
+            .setColor("#5865F2")
             .setDescription(`${message.author} has removed the role ${Role} from ${User}`)
         );
     }
