@@ -25,7 +25,7 @@ module.exports = {
             if (command.cooldown) {
                 client.cooldowns.set(`${message.author.id}-${command.name}`, Date.now() + command.cooldown);
                 setTimeout(() => {
-                    client.cooldowns.delete(`${mesage.author.id}-${command.name}`);
+                    client.cooldowns.delete(`${message.author.id}-${command.name}`);
                 }, command.cooldown)
             };
         } catch (error) {
