@@ -18,8 +18,8 @@ module.exports = {
         });
 
         return message.channel.send(new MessageEmbed()
-        .setColor("#5865F2")
-        .setDescription(`You have successfully withdrawn $${args[0]} from your bank account`)
+            .setColor("#5865F2")
+            .setDescription(`You have successfully withdrawn $${args[0]} from your bank account`)
         );
     }
 }

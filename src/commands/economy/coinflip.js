@@ -17,19 +17,19 @@ module.exports = {
         const coin = Math.floor(Math.random() * 2);
         if (coin == 0) {
             await economy.findOneAndUpdate({ User: message.author.id }, {
-                $inc: { Wallet: -args[0], Bank: 0}
+                $inc: { Wallet: -args[0], Bank: 0 }
             });
             return message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setDescription("You lost")
+                .setColor("#5865F2")
+                .setDescription("You lost")
             );
         } else {
             await economy.findOneAndUpdate({ User: message.author.id }, {
-                $inc: { Wallet: args[0], Bank: 0}
+                $inc: { Wallet: args[0], Bank: 0 }
             });
             return message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setDescription("You won")
+                .setColor("#5865F2")
+                .setDescription("You won")
             );
         }
     }

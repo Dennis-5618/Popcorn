@@ -31,8 +31,8 @@ module.exports = {
         };
 
         return message.channel.send(new MessageEmbed()
-        .setColor("#5865F2")
-        .setDescription(`You have successfully given $${args[1]} to ${user}`)
+            .setColor("#5865F2")
+            .setDescription(`You have successfully given $${args[1]} to ${user}`)
         );
     }
 };

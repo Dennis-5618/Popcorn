@@ -11,9 +11,9 @@ module.exports = {
         if (!data) return message.channel.send("I was unable to find your wallet, please try again");
         else {
             message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setAuthor(`${message.author.username}'s balance`, message.author.displayAvatarURL())
-            .setDescription(`Wallet: \`${data.Wallet}\` \nBank: \`${data.Bank}\``)
+                .setColor("#5865F2")
+                .setAuthor(`${message.author.username}'s balance`, message.author.displayAvatarURL())
+                .setDescription(`Wallet: \`${data.Wallet}\` \nBank: \`${data.Bank}\``)
             );
         };
     }

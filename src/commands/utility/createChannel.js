@@ -51,8 +51,8 @@ module.exports = {
                             });
 
                             message.channel.send(Embed
-                            .setTitle("Channel created!")
-                            .setDescription(`You have successfully created ${created}`)
+                                .setTitle("Channel created!")
+                                .setDescription(`You have successfully created ${created}`)
                             );
                         });
                     };
