@@ -60,8 +60,8 @@ module.exports = {
                     fs.unlinkSync("./ticket.txt");
 
                     setTimeout(() => { ticketChannel.delete() }, 15000);
-                }
-            })
+                };
+            });
         };
     }
 };
