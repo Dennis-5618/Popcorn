@@ -38,12 +38,3 @@ module.exports = {
         };
     }
 };
-
-// .setDescription(`
-//                 ${[...client.categories].map((value) => {
-//                 `${value[0].toUpperCase() + value.slice(1).toLowerCase()}\n
-//                     ${client.commands
-//                         .filter((cmd) => cmd.category == value.toLowerCase())
-//                         .map((value) => `\`${value.name}\``)
-//                         .join(", ")}`
-//             }).join("\n\n")}`)
