@@ -4,6 +4,7 @@ const economy = require("../../schemas/economy");
 module.exports = {
     name: "message",
     run: async (client, message) => {
+        if (message.mentions.members.first() == client.user.id) return message.channel.send("My prefix is `p!`")
         if (message.author.bot || !message.guild || !message.content.toLowerCase().startsWith("p!")) return;
 
         const data = await economy.findOne({ User: message.author.id });
@@ -31,6 +32,5 @@ module.exports = {
         } catch (error) {
             return message.channel.send(`An error has occured: \`${error.message}\``);
         };
-
     }
 };
