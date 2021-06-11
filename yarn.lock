@@ -113,6 +113,11 @@ denque@^1.4.1:
   resolved "https://registry.yarnpkg.com/denque/-/denque-1.5.0.tgz#773de0686ff2d8ec2ff92914316a47b73b1c73de"
   integrity sha512-CYiCSgIF1p6EUByQPlGkKnP1M9g0ZV3qMIrqMqZqdwazygIA/YP2vrbcyl1h/WppKJTdl1F85cXIle+394iDAQ==
 
+discord-buttons@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/discord-buttons/-/discord-buttons-3.2.1.tgz#568eebc322d36b010ea67e891b01208c897d8e66"
+  integrity sha512-UN5xOLG0TwTX6Qr/hjdSyP63HxOYxs5saxfdJ/vijSqjfa/yVPgxO2InKF0l8rpsDOVMsLWGDFLI3+Ax97/LOg==
+
 discord.js@^12.5.3:
   version "12.5.3"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-12.5.3.tgz#56820d473c24320871df9ea0bbc6b462f21cf85c"

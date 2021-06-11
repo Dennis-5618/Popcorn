@@ -3,7 +3,7 @@ const tickets = require("../../schemas/tickets");
 
 module.exports = {
     name: "ticketlist",
-    aliases: ["listtickets", "ticket-list"],
+    aliases: ["listtickets", "ticket-list", "tickets"],
     category: "tickets",
     description: "lists all of the created tickets in this server",
     userPermissions: ["MANAGE_MESSAGES"],

@@ -7,6 +7,8 @@ const glob = require("glob");
 const globPromise = promisify(glob);
 const client = new Client({ ws: { intents: Intents.ALL }, partials: ["CHANNEL", "MESSAGE", "REACTION"] });
 
+require("discord-buttons")(client)
+
 mongoose.connect(database, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
