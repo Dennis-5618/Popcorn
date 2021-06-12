@@ -7,7 +7,7 @@ module.exports = {
     run: async (client, message, args) => {
         if (!args.length) return message.channel.send("Please also include a suggestion");
 
-        const channel = message.guild.channels.cache.get("849594107965210624");
+        const channel = message.guild.channels.cache.get("853229507640426517");
         await channel.send(new MessageEmbed()
             .setColor("#5865F2")
             .setTitle("Suggestion")

@@ -19,7 +19,7 @@ module.exports = {
         const supportButton = new MessageButton()
         .setStyle("url")
         .setLabel("Support server")
-        .setURL("https://discord.gg/U43ty2vA4y")
+        .setURL("https://discord.gg/qAE2chcEn4")
 
         const buttonRow = new MessageActionRow()
             .addComponent(inviteButton)

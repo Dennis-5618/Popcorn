@@ -7,7 +7,7 @@ module.exports = {
     run: async (client, message, args) => {
         if (!args.length) return message.channel.send("please also include something you want to report");
 
-        const reportChannel = message.guild.channels.cache.get("849393352734277653");
+        const reportChannel = message.guild.channels.cache.get("853229555144589322");
         await reportChannel.send(new MessageEmbed()
             .setColor("#5865F2")
             .setTitle("Report")
