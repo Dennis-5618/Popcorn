@@ -1,6 +1,6 @@
 const { MessageEmbed, MessageCollector } = require("discord.js");
 const { MessageButton } = require("discord-buttons");
-const tickets = require("../../schemas/tickets")
+const tickets = require("../../schemas/tickets");
 
 module.exports = {
     name: "createticket",
@@ -72,6 +72,7 @@ module.exports = {
                                     $push: {
                                         Info: [{
                                             Category: category.id,
+                                            Channel: channel.id,
                                             Role: role.id,
                                             Message: ticket.id
                                         }]

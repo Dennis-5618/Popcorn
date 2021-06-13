@@ -18,11 +18,10 @@ module.exports = {
 
             // Looping through all of the tickets
             for (const info of data.Info) {
-                const { Category, Channel, Role } = info;
-                embed.addField(`${count++}.`, `Category: \`${client.channels.cache.get(Category).name}\` \nChannel: ${client.channels.cache.get(Channel)} \n Support role: ${message.guild.roles.cache.find(r => r.id == Role)}`);
+                const { Category, Channel, Role, Message } = info;
+                embed.addField(`${count++}.`, `Ticket ID: \`${Message}\` \nCategory: \`${client.channels.cache.get(Category).name}\` \nChannel: ${client.channels.cache.get(Channel)} \nSupport role: ${message.guild.roles.cache.find(r => r.id == Role)}`);
             };
-
-            message.channel.send(embed)
-        }
+            message.channel.send(embed);
+        };
     }
-}
+};
