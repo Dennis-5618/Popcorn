@@ -2,6 +2,7 @@
 
 ## Features
 * A robust command and error handling system
+* Economy system, complete with a shop
 * A ticketing system allowing you to create up to 10 tickets per server
 * Moderation and utility commands
 * An easy way to make and manage channels and roles
@@ -9,7 +10,6 @@
 ## Plans
 Below you can read some of the features that are being worked on and will be added soon
 
-* Economy system, complete with a shop
 * Member count channel
 * User verification
 * Modlog system
