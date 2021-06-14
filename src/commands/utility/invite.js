@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "invite",
-    aliases: ["inv", "support"],
+    aliases: ["support"],
     category: "utility",
     description: "sends a link for inviting Popcorn to your server",
     run: async (client, message) => {
