@@ -7,7 +7,7 @@ module.exports = {
         if (message.author.bot || !message.guild || !message.content.toLowerCase().startsWith("p!")) return;
 
         const data = await economy.findOne({ User: message.author.id });
-        if (!data) await economy.create({ User: message.author.id, Wallet: 0, Bank: 0 });
+        if (!data) await economy.create({ User: message.author.id, Wallet: 0, Bank: 0, userInventory: [] });
 
         const [cmd, ...args] = message.content.trim().slice("p!".length).split(/ +/g);
         const command = client.commands.get(cmd.toLowerCase()) || client.commands.get(client.aliases.get(cmd.toLowerCase()));
