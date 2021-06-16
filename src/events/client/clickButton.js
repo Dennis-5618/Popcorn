@@ -1,16 +1,15 @@
-const fs = require("fs");
 const { MessageEmbed, MessageAttachment } = require("discord.js");
 const { MessageButton } = require("discord-buttons");
 
-const tickets = require("../../schemas/tickets")
+const tickets = require("../../schemas/tickets");
 
 module.exports = {
     name: "clickButton",
     run: async (client, button) => {
-        const data = await tickets.findOne({ Guild: button.guild.id });
-        if (!data) return;
+        const ticket = await tickets.findOne({ Guild: button.guild.id });
+        if (!ticket) return;
 
-        for (const info of data.Info) {
+        for (const info of ticket.Info) {
             var { Category, Role } = info;
         };
 
@@ -35,13 +34,6 @@ module.exports = {
         if (button.id == "CloseTicket") {
             await button.defer();
             button.channel.send("This ticket will be closed in 15 seconds...");
-
-            // fs.writeFileSync("./ticket.txt", transcript.join("\n"));
-
-            // const attachment = new MessageAttachment(fs.createReadStream("./ticket.txt"));
-            // await button.channel.send(attachment);
-
-            // fs.unlinkSync("./ticket.txt");
 
             setTimeout(() => { button.channel.delete() }, 15000);
         };
