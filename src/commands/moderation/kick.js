@@ -23,9 +23,11 @@ module.exports = {
 
             await User.kick(Reason);
 
-            return message.channel.send(new MessageEmbed()
+            await message.channel.send(new MessageEmbed()
                 .setColor("#5865F2")
-                .setDescription(`\`${User.tag}\` has been kicked by ${message.author} \nReason: \`${Reason}\``)
+                .addField("Kicked user:", User.user.tag, true)
+                .addField("Kicked by:", message.author.tag, true)
+                .addField("Reason:", `\`${Reason}\``)
             );
 
         } catch {

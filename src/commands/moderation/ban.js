@@ -24,8 +24,11 @@ module.exports = {
 
             await message.channel.send(new MessageEmbed()
                 .setColor("#5865F2")
-                .setDescription(`\`${User.tag}\` has been banned by ${message.author} \nReason: \`${Reason}\``)
+                .addField("Banned user:", User.user.tag, true)
+                .addField("Banned by:", message.author.tag, true)
+                .addField("Reason:", `\`${Reason}\``)
             );
+
             return message.guild.members.ban(User.id, { reason: Reason, days: 7 });
 
         } catch {
