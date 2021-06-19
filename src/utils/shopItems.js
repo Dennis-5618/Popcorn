@@ -1,10 +1,5 @@
 module.exports = [
     {
-        item: "test",
-        id: "test",
-        price: 1
-    },
-    {
         item: "fishing rod",
         id: "rod",
         price: 5000
