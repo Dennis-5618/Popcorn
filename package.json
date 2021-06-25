@@ -4,6 +4,7 @@
   "main": "./src/popcorn.js",
   "license": "MIT",
   "dependencies": {
+    "@top-gg/sdk": "^3.1.1",
     "discord-buttons": "^3.2.1",
     "discord.js": "^12.5.3",
     "glob": "^7.1.7",

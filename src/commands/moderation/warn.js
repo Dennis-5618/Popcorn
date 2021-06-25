@@ -29,7 +29,9 @@ module.exports = {
 
         return message.channel.send(new MessageEmbed()
             .setColor("#5865F2")
-            .setDescription(`${User} has been warned by ${message.author} \nReason: \`${Reason}\``)
+            .addField("Warned user:", User.user.tag, true)
+            .addField("Warned by:", message.author.tag, true)
+            .addField("Reason:" `\`${Reason}\``)
         );
     }
 };
