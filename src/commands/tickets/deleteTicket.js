@@ -4,7 +4,7 @@ module.exports = {
     name: "deleteticket",
     aliases: ["ticketdelete", "ticket-delete"],
     category: "tickets",
-    description: "delets a ticket from the database, allowing you to create a new one",
+    description: "deletes a ticket from the database, allowing you to create a new one",
     userPermissions: ["ADMINISTRATOR"],
     run: async (client, message, args) => {
         const msg = await message.channel.messages.fetch(args[0]);

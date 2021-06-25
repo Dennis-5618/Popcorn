@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { MessageButton } = require("discord-buttons");
 
 const tickets = require("../../schemas/tickets");
