@@ -10,7 +10,6 @@ module.exports = {
 
         setInterval(() => {
             api.postStats({ serverCount: client.guilds.cache.size });
-            console.log(`Posted servercount to top.gg | ${client.guilds.cache.size} servers`);
         }, 1800000);
     }
 };
