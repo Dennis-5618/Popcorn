@@ -30,10 +30,11 @@ Below you can read some of the features that are being worked on and will be add
 
 ### Configuration
 * Create a file in your folder named *config.json*
-* Add the text below to it and replace **[Discord bot token]** and **[MongoDB token]** with the tokens you've generated before
+* Paste the text below in your *config.json* file
 ```
 {
 "token": "[Discord bot token]",
 "database": "[MongoDB token]"
 }
 ```
+* replace **[Discord bot token]** and **[MongoDB token]** with the tokens you've generated before
