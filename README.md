@@ -26,6 +26,7 @@ Below you can read some of the features that are being worked on and will be add
 * [Discord bot token](https://discord.com/developers/applications)
 * [MongoDB token](https://www.mongodb.com/)
 * [Node.js V14 or newer](https://nodejs.org/en/)
+#### **Never share your Discord bot token or MongoDB token as those are the login details to your bot and database**
 
 ### Configuration
 * Create a file in your folder named *config.json*
