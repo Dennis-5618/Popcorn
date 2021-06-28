@@ -37,6 +37,8 @@ Below you can read some of the features that are being worked on and will be add
 * [node-fetch](https://github.com/node-fetch/node-fetch)
 * [@topgg-sdk](https://github.com/top-gg/node-sdk)
 
+Use `npm i [package name]` or `yarn add [package name]` to install
+
 ### Configuration
 * Create a file in your folder named *config.json*
 * Paste the text below in your *config.json* file
