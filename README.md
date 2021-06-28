@@ -28,6 +28,15 @@ Below you can read some of the features that are being worked on and will be add
 * [Node.js V14 or newer](https://nodejs.org/en/)
 #### **Never share your Discord bot token or MongoDB token as those are the login details to your bot and database**
 
+### Packages used
+* [discord.js](https://github.com/discordjs/discord.js)
+* [discord-buttons](https://github.com/AngeloCore/discord-buttons)
+* [node-glob](https://github.com/isaacs/node-glob)
+* [ms](https://github.com/vercel/ms)
+* [mongoose](https://github.com/Automattic/mongoose)
+* [node-fetch](https://github.com/node-fetch/node-fetch)
+* [@topgg-sdk](https://github.com/top-gg/node-sdk)
+
 ### Configuration
 * Create a file in your folder named *config.json*
 * Paste the text below in your *config.json* file
