@@ -28,12 +28,24 @@ Below you can read some of the features that are being worked on and will be add
 * [Node.js V14 or newer](https://nodejs.org/en/)
 #### **Never share your Discord bot token or MongoDB token as those are the login details to your bot and database**
 
+### Packages used
+* [discord.js](https://github.com/discordjs/discord.js)
+* [discord-buttons](https://github.com/AngeloCore/discord-buttons)
+* [node-glob](https://github.com/isaacs/node-glob)
+* [ms](https://github.com/vercel/ms)
+* [mongoose](https://github.com/Automattic/mongoose)
+* [node-fetch](https://github.com/node-fetch/node-fetch)
+* [@topgg-sdk](https://github.com/top-gg/node-sdk)
+
+Use `npm i [package name]` or `yarn add [package name]` to install
+
 ### Configuration
 * Create a file in your folder named *config.json*
-* Add the text below to it and replace **[Discord bot token]** and **[MongoDB token]** with the tokens you've generated before
+* Paste the text below in your *config.json* file
 ```
 {
 "token": "[Discord bot token]",
 "database": "[MongoDB token]"
 }
 ```
+* replace **[Discord bot token]** and **[MongoDB token]** with the tokens you've generated before
