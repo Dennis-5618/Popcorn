@@ -5,7 +5,7 @@ module.exports = {
     name: "messageDelete",
     run: async (client, message) => {
         const data = await settings.findOne({ Guild: message.guild.id });
-        if (!data || message.partial || message.system) return;
+        if (!data || message.partial || message.system || message.author.bot) return;
 
         const logChannel = client.channels.cache.get(data.LogChannel);
 
