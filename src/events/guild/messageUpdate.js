@@ -12,6 +12,7 @@ module.exports = {
         const embed = new MessageEmbed()
             .setColor("#5865F2")
             .setAuthor(newMessage.author.tag, newMessage.author.avatarURL({ dynamic: true }))
+            .setTitle("Message updated")
             .addField("Before:", oldMessage.content)
             .addField("After:", newMessage.content)
             .setFooter(`Message ID: ${newMessage.id}`)
