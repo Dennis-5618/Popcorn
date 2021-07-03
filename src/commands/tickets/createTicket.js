@@ -1,6 +1,6 @@
 const { MessageEmbed, MessageCollector } = require("discord.js");
 const { MessageButton } = require("discord-buttons");
-const tickets = require("../../schemas/tickets");
+const tickets = require("../../schemas/settings");
 
 module.exports = {
     name: "createticket",
@@ -11,7 +11,7 @@ module.exports = {
     botPermissions: ["MANAGE_CHANNELS"],
     run: async (client, message) => {
         const data = await tickets.findOne({ Guild: message.guild.id });
-        if (data && data.Info?.length >= 10) return message.channel.send("You have reached the maximum amount of tickets allowed");
+        if (data && data.Tickets?.length >= 10) return message.channel.send("You have reached the maximum amount of tickets allowed");
 
         const embed = new MessageEmbed().setColor("#5865F2");
 
@@ -70,7 +70,7 @@ module.exports = {
 
                                 await tickets.updateOne({ Guild: message.guild.id }, {
                                     $push: {
-                                        Info: [{
+                                        Tickets: [{
                                             Category: category.id,
                                             Channel: channel.id,
                                             Role: role.id,

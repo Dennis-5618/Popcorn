@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const { MessageButton } = require("discord-buttons");
 
-const tickets = require("../../schemas/tickets");
+const tickets = require("../../schemas/settings");
 
 module.exports = {
     name: "clickButton",
@@ -9,7 +9,7 @@ module.exports = {
         const ticket = await tickets.findOne({ Guild: button.guild.id });
         if (!ticket) return;
 
-        for (const info of ticket.Info) {
+        for (const info of ticket.Tickets) {
             var { Category, Role } = info;
         };
 

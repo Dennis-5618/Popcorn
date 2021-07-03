@@ -12,7 +12,7 @@ module.exports = {
 
         await settings.findOneAndUpdate({ Guild: message.guild.id}, {
             Guild: message.guild.id,
-            LogChannel: channel.id
+            Logchannel: channel.id
         }, {
             upsert: true
         });

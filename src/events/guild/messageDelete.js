@@ -7,7 +7,7 @@ module.exports = {
         const data = await settings.findOne({ Guild: message.guild.id });
         if (!data || message.partial || message.system || message.author.bot) return;
 
-        const logChannel = client.channels.cache.get(data.LogChannel);
+        const logChannel = client.channels.cache.get(data.Logchannel);
 
         const embed = new MessageEmbed()
             .setColor("#FF4C4C")

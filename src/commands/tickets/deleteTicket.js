@@ -1,4 +1,4 @@
-const tickets = require("../../schemas/tickets");
+const tickets = require("../../schemas/settings");
 
 module.exports = {
     name: "deleteticket",
@@ -12,7 +12,7 @@ module.exports = {
 
         await tickets.updateOne({ Guild: message.guild.id }, {
             $pull: {
-                Info: { Message: args[0] }
+                Tickets: { Message: args[0] }
             }
         });
 

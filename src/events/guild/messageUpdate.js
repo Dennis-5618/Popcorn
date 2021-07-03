@@ -5,9 +5,9 @@ module.exports = {
     name: "messageUpdate",
     run: async (client, oldMessage, newMessage) => {
         const data = await settings.findOne({ Guild: newMessage.guild.id });
-        if (!data || message.system || message.author.bot) return;
+        if (!data) return;
 
-        const logChannel = client.channels.cache.get(data.LogChannel);
+        const logChannel = client.channels.cache.get(data.Logchannel);
         
         const embed = new MessageEmbed()
             .setColor("#5865F2")

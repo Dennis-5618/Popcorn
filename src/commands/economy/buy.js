@@ -7,6 +7,8 @@ module.exports = {
     category: "economy",
     description: "buys the specified item and adds it to your inventory",
     run: async (client, message, args) => {
+        if (!args.length) return message.channel.send("please make sure to also provide the ID of the item you want to buy");
+        
         const item = shopItems.find((value) => value.id == args[0].toLowerCase());
         if (!item) return message.channel.send("I couldn't find that item, please make sure to provide the item ID");
 
@@ -22,8 +24,8 @@ module.exports = {
         });
 
         return message.channel.send(new MessageEmbed()
-        .setColor("#5865F2")
-        .setDescription(`You have bought a ${item.item} for $${item.price}`)
+            .setColor("#5865F2")
+            .setDescription(`You have bought a ${item.item} for $${item.price}`)
         );
     }
 };

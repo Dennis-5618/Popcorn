@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
-const settings = mongoose.Schema({
+const Settings = mongoose.Schema({
     Guild: { type: String, required: true },
-    LogChannel: { type: String }
+    Logchannel: { type: String },
+    Tickets: { type: Array, required: true }
 });
 
-module.exports = mongoose.model("Settings", settings);
+module.exports = mongoose.model("Settings", Settings);
