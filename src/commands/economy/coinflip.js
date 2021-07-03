@@ -6,6 +6,7 @@ module.exports = {
     aliases: ["cf"],
     category: "economy",
     description: "flips a coin with the specified amount of money",
+    cooldown: 10 * 1000,
     run: async (client, message, args) => {
         if (args[0] % 1 != 0 || args[0] <= 0) return message.channel.send("Please specify the amount of money you want to bet as a valid number above 0");
 
