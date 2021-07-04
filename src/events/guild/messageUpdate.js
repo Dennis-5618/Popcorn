@@ -3,19 +3,19 @@ const settings = require("../../schemas/settings");
 
 module.exports = {
     name: "messageUpdate",
-    run: async (client, oldMessage, newMessage) => {
-        const data = await settings.findOne({ Guild: newMessage.guild.id });
-        if (!data) return;
+    run: async (client, oldMessage, message) => {
+        const data = await settings.findOne({ Guild: message.guild.id });
+        if (!data || message.system || message.author.bot) return;
 
-        const logChannel = client.channels.cache.get(data.Logchannel);
+        const logChannel = client.channels.cache.get(data.LogChannel);
         
         const embed = new MessageEmbed()
             .setColor("#5865F2")
-            .setAuthor(newMessage.author.tag, newMessage.author.avatarURL({ dynamic: true }))
+            .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
             .setTitle("Message updated")
             .addField("Before:", oldMessage.content)
-            .addField("After:", newMessage.content)
-            .setFooter(`Message ID: ${newMessage.id}`)
+            .addField("After:", message.content)
+            .setFooter(`Message ID: ${message.id}`)
             .setTimestamp()
 
         logChannel.send(embed);
