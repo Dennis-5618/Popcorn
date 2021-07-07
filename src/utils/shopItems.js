@@ -8,5 +8,10 @@ module.exports = [
         item: "hunting rifle",
         id: "rifle",
         price: 15000
+    },
+    {
+        item: "pickaxe",
+        id: "pickaxe",
+        price: 20000
     }
 ]
