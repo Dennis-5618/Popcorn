@@ -5,7 +5,7 @@ module.exports = {
     name: "messageUpdate",
     run: async (client, oldMessage, message) => {
         const data = await settings.findOne({ Guild: message.guild.id });
-        if (!data && !data.Logchannel || message.system ) return;
+        if (!data || !data.Logchannel || message.system || message.author.bot) return;
 
         const logChannel = client.channels.cache.get(data.Logchannel);
         const embed = new MessageEmbed()

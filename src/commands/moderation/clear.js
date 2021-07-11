@@ -12,6 +12,8 @@ module.exports = {
         const user = message.mentions.members.first();
 
         if (user) {
+            if (!args[1]) return message.channel.send("Please also provide the amount of messages I have to delete from the mentioned user");
+            
             const messages = await message.channel.messages.fetch({ limit: args[1] });
             const usable = messages.filter((m) => (m.author.id == user.id) && !m.pinned);
 
