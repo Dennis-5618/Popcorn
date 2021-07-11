@@ -3,7 +3,7 @@ const settings = require("../../schemas/settings");
 
 module.exports = {
     name: "guildBanAdd",
-    run: async (client, guild, user) => {
+    run: async (client, guild) => {
         const data = await settings.findOne({ Guild: guild.id });
         if (!data) return;
 
