@@ -5,6 +5,7 @@
 * Economy system, complete with a shop
 * A ticketing system allowing you to create up to 10 tickets per server
 * Moderation and utility commands
+* Modlog system
 * An easy way to make and manage channels and roles
 
 # Plans
@@ -12,7 +13,6 @@ Below you can read some of the features that are being worked on and will be add
 
 * Member count channel
 * User verification
-* Modlog system
 * Custom prefixes
 * Leveling system
 * More ways to moderate and manage your server.
