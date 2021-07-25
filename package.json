@@ -4,6 +4,7 @@
   "main": "./src/popcorn.js",
   "license": "MIT",
   "dependencies": {
+    "@iamtraction/google-translate": "^1.1.2",
     "@top-gg/sdk": "^3.1.1",
     "discord-buttons": "^4.0.0",
     "discord.js": "^12.5.3",
