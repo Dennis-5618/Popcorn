@@ -10,9 +10,12 @@ module.exports = {
         const logChannel = data.guild.channels.cache.get(database.Logchannel);
         logChannel.send(new MessageEmbed()
             .setColor("#FF4C4C")
-            .setTitle("Channel deleted")
-            .addField("Channel name:", data.name, true)
-            .addField("Channel type:", data.type, true)
+            .setAuthor(data.guild.name, data.guild.iconURL({ dynamic: true }))
+            .setTitle("Channel created")
+            .addField("Name:", data.name)
+            .addField("Type:", data.type)
+            .setFooter(`Channel ID: ${data.id}`)
+            .setTimestamp()
         );
     }
 };
