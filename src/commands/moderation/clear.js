@@ -3,40 +3,44 @@ const ms = require("ms");
 
 module.exports = {
     name: "clear",
-    aliases: ["purge"],
+    aliases: ["purge", "clean"],
     category: "moderation",
-    description: "clears a specified amount of messages from the that it is used in",
+    description: "clears a specified amount of messages from the channel or user",
     userPermissions: ["MANAGE_MESSAGES"],
     botPermissions: ["MANAGE_MESSAGES"],
     run: async (client, message, args) => {
-        const user = message.mentions.members.first();
+        const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 
-        if (user) {
-            if (!args[1]) return message.channel.send("Please also provide the amount of messages I have to delete from the mentioned user");
-            
-            const messages = await message.channel.messages.fetch({ limit: args[1] });
-            const usable = messages.filter((m) => (m.author.id == user.id) && !m.pinned);
-
-            await message.delete()
-            await message.channel.bulkDelete(usable);
-
-            return message.channel.send(new MessageEmbed()
-                .setColor("#5865F2")
-                .setDescription(`Successfully deleted ${usable.size} messages of ${user}`)
-            );
-
-        } else {
-            if (!args.length || isNaN[args[0]] || parseInt(args[0]) > 100 || parseInt(args[0]) < 0) return message.channel.send("Please specify the amount of messages you want to delete as a number above 0");
+        if (!user) {
+            if (isNaN[args[0]] || parseInt(args[0]) > 99 || parseInt(args[0]) <= 0) return message.channel.send("Please provide the amount of messages to be deleted as a number between 1 and 99");
 
             const messages = await message.channel.messages.fetch({ limit: args[0] });
-            const usable = messages.filter((m) => (m.createdTimestamp - Date.now()) < ms("14d") && !m.pinned)
+            const filteredMessages = await messages.filter((res) => (res.createdTimestamp - Date.now()) < ms("14d") && !res.pinned);
 
-            await message.delete();
-            await message.channel.bulkDelete(usable);
+            message.delete();
+            await message.channel.bulkDelete(filteredMessages);
 
-            return message.channel.send(new MessageEmbed()
+            message.channel.send(new MessageEmbed()
+            .setColor("#5865F2")
+            .setDescription(`You have successfully deleted ${args[0]} messages`))
+
+        } else {
+            if (!args[1]) return message.channel.send("Please also provide the amount of messages you want to delete of the mentioned user");
+            if (isNaN[args[1]] || parseInt(args[1]) > 99 || parseInt(args[1]) <= 0) return message.channel.send("Please provide the amount of messages to be deleted as a number between 1 and 99");
+
+            let deletedMessages = 0;
+            const messages = await message.channel.messages.fetch();
+            const filteredMessages = await messages.filter(res => res.author.id == user.id);
+
+            filteredMessages.forEach(msg => {
+                if (deletedMessages >= args[1]) return;
+                msg.delete();
+                deletedMessages++;
+            });
+
+            message.channel.send(new MessageEmbed()
                 .setColor("#5865F2")
-                .setDescription(`Successfully deleted ${usable.size} messages`)
+                .setDescription(`You have successfully deleted ${args[1]} messages sent by ${user}`)
             );
         };
     }

@@ -1,3 +1,6 @@
+const settings = require("../../schemas/settings");
+const { MessageEmbed } = require("discord.js");
+
 module.exports = {
     name: "channelDelete",
     run: async (client, data) => {
