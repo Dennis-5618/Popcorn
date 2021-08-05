@@ -5,6 +5,7 @@ module.exports = {
     name: "fish",
     category: "economy",
     description: "use your fishing rod to fish for money",
+    cooldown: 30 * 60 * 1000,
     run: async (client, message) => {
         const data = await economy.findOne({ User: message.author.id });
         if (!data) return message.channel.send("I couldn't find your inventory, please try again");
