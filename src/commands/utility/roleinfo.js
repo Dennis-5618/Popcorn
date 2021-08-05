@@ -7,8 +7,7 @@ module.exports = {
     description: "shows information about a mentioned role or by ID",
     run: async (client, message, args) => {
         const role = message.mentions.roles.first() || await message.guild.roles.cache.get(args[0]);
-        if (!role) return message.channel.send("I couldn't find that role, please try again");
-        console.log()
+        if (!role) return message.channel.send("Please mention or provide the ID of the role");
 
         message.channel.send(new MessageEmbed()
         .setColor(role.color)

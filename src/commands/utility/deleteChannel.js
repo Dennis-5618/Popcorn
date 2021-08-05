@@ -8,15 +8,14 @@ module.exports = {
     userPermissions: ["MANAGE_CHANNELS"],
     botPermissions: ["MANAGE_CHANNELS"],
     run: async (client, message, args) => {
-        const Channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]);
-        try {
-            await Channel.delete();
-            message.channel.send(new MessageEmbed()
-                .setColor("#5865F2")
-                .setTitle("Channel deleted")
-                .setDescription(`You have succesfully deleted \`${Channel.name}\``))
-        } catch {
-            return message.channel.send("An error has occured while trying to delete that channel, please try again");
-        };
+        const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]);
+        if (!channel) return message.channel.send("Please mention or provide the ID of the channel you're trying to delete");
+
+        await channel.delete();
+        return message.channel.send(new MessageEmbed()
+            .setColor("#5865F2")
+            .setTitle("Channel deleted")
+            .setDescription(`You have successfully deleted \`${channel.name}\``)
+        );
     }
 };

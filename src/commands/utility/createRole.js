@@ -7,8 +7,8 @@ module.exports = {
     userPermissions: ["MANAGE_ROLES"],
     botPermissions: ["MANAGE_ROLES"],
     run: async (client, message, args) => {
-        const Role = args.join(" ");
-        if (!Role) return message.channel.send("Please specify the name you want to give to the role");
+        const role = args.join(" ");
+        if (!role) return message.channel.send("Please specify the name you want to give to the role");
 
         await message.guild.roles.create({
             data: {
@@ -19,7 +19,7 @@ module.exports = {
 
         return message.channel.send(new MessageEmbed()
             .setColor("#5865F2")
-            .setDescription(`You have successfully created ${message.guild.roles.cache.find(r => r.name == Role)}`)
+            .setDescription(`You have successfully created ${message.guild.roles.cache.find(r => r.name == role)}`)
         );
     }
 };

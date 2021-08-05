@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageCollector } = require("discord.js");
+const { MessageCollector, MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "createchannel",
@@ -7,57 +7,56 @@ module.exports = {
     description: "creates a new channel with the specified type and name",
     userPermissions: ["MANAGE_CHANNELS"],
     botPermissions: ["MANAGE_CHANNELS"],
-    run: async (client, message, args) => {
-        const Embed = new MessageEmbed().setColor("#5865F2");
+    run: async (client, message) => {
+        const embed = new MessageEmbed().setColor("#5865F2");
 
-        message.channel.send(Embed
+        message.channel.send(embed
             .setTitle("Channel setup (1/3)")
-            .setDescription(`Please specify if you want to create either a text or voice channel`)
+            .setDescription("Please specify if you want to create a text or voice channel")
         );
 
-        const channelCollector = new MessageCollector(message.channel, m => m.author.id == message.author.id, { time: 30000 });
-        channelCollector.on("collect", async msg => {
+        const channelTypeCollector = new MessageCollector(message.channel, (m) => m.author.id == message.author.id, { time: 30000 });
+        channelTypeCollector.on("collect", (msg) => {
 
-            const Type = msg.content.toLowerCase();
-            if (Type != "text" && Type != "voice") return message.channel.send("Invalid channel type, please specify if you want to create either a text or voice channel");
-            else {
-                channelCollector.stop();
+            const channelType = msg.content.toLowerCase();
+            if (channelType != "text" && channelType != "voice") return message.channel.send("Please make sure to specify if you want to create a text or voice channel");
 
-                message.channel.send(Embed
-                    .setTitle("Channel setup (2/3)")
-                    .setDescription("Please specify the category ID where you want to create the channel under")
+            channelTypeCollector.stop();
+
+            message.channel.send(embed
+                .setTitle("Channel setup (2/3)")
+                .setDescription("Please specify the category ID where you want to create the channel under")
+            );
+
+            const categoryCollector = new MessageCollector(message.channel, (m) => m.author.id == message.author.id, { time: 30000 });
+            categoryCollector.on("collect", (msg) => {
+
+                const channelCategory = message.guild.channels.cache.find(c => c.type == "category" && c.id == msg.content);
+                if (!channelCategory) return message.channel.send("I couldn't find the category, please try again");
+
+                categoryCollector.stop();
+
+                message.channel.send(embed
+                    .setTitle("Channel setup (3/3)")
+                    .setDescription("Please specify the name you want to give to the channel")
                 );
 
-                const categoryCollector = new MessageCollector(message.channel, m => m.author.id == message.author.id, { time: 30000 });
-                categoryCollector.on("collect", async msg => {
+                const channelNameCollector = new MessageCollector(message.channel, (m) => m.author.id == message.author.id, { time: 30000 });
+                channelNameCollector.on("collect", async (msg) => {
 
-                    const Category = message.guild.channels.cache.find(ch => ch.type == "category" && ch.id == msg.content);
-                    if (!Category) return message.channel.send("I couldn't find that category, please try again");
-                    else {
-                        categoryCollector.stop();
+                    const newChannel = await message.guild.channels.create(msg.content, {
+                        parent: channelCategory,
+                        type: channelType
+                    });
 
-                        message.channel.send(Embed
-                            .setTitle("Channel setup (3/3)")
-                            .setDescription("Please specify the name you want to give to the channel")
-                        );
+                    channelNameCollector.stop();
 
-                        const nameCollector = new MessageCollector(message.channel, m => m.author.id == message.author.id, { time: 30000 });
-                        nameCollector.on("collect", async msg => {
-                            nameCollector.stop();
-
-                            const created = await message.guild.channels.create(msg.content, {
-                                parent: Category,
-                                type: Type
-                            });
-
-                            message.channel.send(Embed
-                                .setTitle("Channel created!")
-                                .setDescription(`You have successfully created ${created}`)
-                            );
-                        });
-                    };
+                    message.channel.send(embed
+                        .setTitle("Channel created!")
+                        .setDescription(`You have successfully created ${newChannel}`)
+                    );
                 });
-            };
+            });
         });
     }
 };

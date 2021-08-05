@@ -8,23 +8,23 @@ module.exports = {
     description: "sends a link for inviting Popcorn to your server",
     run: async (client, message) => {
         const embed = new MessageEmbed()
-        .setColor("#5865F2")
-        .setAuthor("Click on the button below to invite Popcorn or get support")
+            .setColor("#5865F2")
+            .setAuthor("Click on the button below to invite Popcorn or get support")
 
         const inviteButton = new MessageButton()
-        .setStyle("url")
-        .setLabel("Invite Popcorn")
-        .setURL("https://discord.com/api/oauth2/authorize?client_id=848841605876023307&permissions=2617370710&scope=bot%20applications.commands")
+            .setStyle("url")
+            .setLabel("Invite Popcorn")
+            .setURL("https://discord.com/api/oauth2/authorize?client_id=848841605876023307&permissions=2617370710&scope=bot%20applications.commands")
 
         const supportButton = new MessageButton()
-        .setStyle("url")
-        .setLabel("Support server")
-        .setURL("https://discord.gg/qAE2chcEn4")
+            .setStyle("url")
+            .setLabel("Support server")
+            .setURL("https://discord.gg/qAE2chcEn4")
 
         const buttonRow = new MessageActionRow()
             .addComponent(inviteButton)
             .addComponent(supportButton)
 
-        message.channel.send({ embed, component: buttonRow})
+        message.channel.send({ embed, component: buttonRow });
     }
 };

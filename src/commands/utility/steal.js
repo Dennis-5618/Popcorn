@@ -17,7 +17,7 @@ module.exports = {
                 const URL = `https://cdn.discordapp.com/emojis/${parsed.id + fileExtention}`;
 
                 await message.guild.emojis.create(URL, parsed.name).then((added) => message.channel.send(`You have successfully added the following emojis to the server: \n${added}`));
-            }
+            };
         };
     }
-}
+};

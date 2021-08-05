@@ -7,14 +7,14 @@ module.exports = {
     userPermissions: ["MANAGE_ROLES"],
     botPermissions: ["MANAGE_ROLES"],
     run: async (client, message, args) => {
-        const Role = message.guild.roles.cache.get(args[1]) || message.mentions.roles.first();
-        if (!Role) return message.channel.send("I couldn't find that role, please try again");
+        const role = message.guild.roles.cache.get(args[1]) || message.mentions.roles.first();
+        if (!role) return message.channel.send("I couldn't find that role, please try again");
 
-        await Role.delete();
+        await role.delete();
 
         return message.channel.send(new MessageEmbed()
             .setColor("#5865F2")
-            .setDescription(`You have successfully deleted the role: \`${Role.name}\``)
+            .setDescription(`You have successfully deleted the role: \`${role.name}\``)
         );
     }
 };
