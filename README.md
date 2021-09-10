@@ -1,5 +1,5 @@
 ## Popcorn is an open-source, simple and easy-to-use bot which aims to make your server more fun and to get rid of single-use bots.
-https://img.shields.io/github/stars/Dennis-5618/Popcorn?style=flat-square
+![stars](https://img.shields.io/github/stars/Dennis-5618/Popcorn?style=flat-square)
 
 # Features
 * A robust command and error handling system
