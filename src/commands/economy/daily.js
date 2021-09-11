@@ -3,19 +3,19 @@ const economy = require("../../schemas/economy");
 
 module.exports = {
     name: "daily",
+    aliases: ["aliases"],
     category: "economy",
-    description: "gives you your daily free coins",
-    cooldown: 24 * 60 * 60 * 1000,
+    description: "gives you your daily amount of free money",
+    cooldown: 86400000, // 1 day
     run: async (client, message) => {
-        const money = Math.floor(Math.random() * 300) + 1;
+        const money = Math.floor(Math.random() * 750) + 1;
+        const embed = new MessageEmbed()
+        .setColor("BLURPLE")
+        .setDescription(`You have collected your daily free $${money}`)
+        message.channel.send({ embeds: [embed] });
 
-        await economy.findOneAndUpdate({ User: message.author.id }, {
+        await economy.findOneAndUpdate({ User: message.author.id}, {
             $inc: { Wallet: money }
         });
-
-        return message.channel.send(new MessageEmbed()
-        .setColor("#5865F2")
-        .setDescription(`You have collected your daily free $${money}`)
-        );
     }
 };

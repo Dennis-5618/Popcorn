@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const economy = new mongoose.Schema({
-    User: { type: String, require: true },
-    Wallet: { type: Number },
-    Bank: { type: Number },
-    userInventory: { type: Object }
+const economy = mongoose.Schema({
+    User: { type: String, required: true },
+    Wallet: { type: Number, required: true },
+    Bank: { type: Number, required: true },
+    Inventory: { type: Object, required: true }
 });
 
 module.exports = mongoose.model("economy", economy);

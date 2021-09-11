@@ -3,22 +3,24 @@ const economy = require("../../schemas/economy");
 
 module.exports = {
     name: "leaderboard",
+    aliases: ["board"],
     category: "economy",
-    description: "shows the amount of money the richest people in the server have",
+    description: "shows how much money the richest users in this server have",
     run: async (client, message, args) => {
         let counter = 1;
-        const data = await economy.find()
-        const embed = new MessageEmbed().setColor("#5865F2").setAuthor("Leaderboard", message.guild.iconURL());
 
-        for (const user of data) {
-            const { User, Wallet, Bank } = user;
+        const data = await economy.find();
+        const embed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .setAuthor("Leaderboard", message.guild.iconURL())
+        
+        for (const info of data) {
+            const { User, Wallet, Bank } = info;
 
-            const isInGuild = message.guild.members.cache.get(User);
-            if (isInGuild) {
-                embed.addField(`${counter++}. ${isInGuild.user.tag}`, `Balance: ${Wallet + Bank}`)
-            };
+            const inGuild = message.guild.members.cache.get(User);
+            if (inGuild) embed.addField(`${counter++}. ${inGuild.user.tag}`, `Balance: ${Wallet + Bank}`);
         };
 
-        message.channel.send(embed)
+        return message.channel.send({ embeds: [embed] });
     }
 };

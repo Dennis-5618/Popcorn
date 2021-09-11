@@ -4,20 +4,17 @@ const settings = require("../../schemas/settings");
 module.exports = {
     name: "messageDelete",
     run: async (client, message) => {
-        const data = await settings.findOne({ Guild: message.guild.id });
-        if (!data || message.partial || message.system || message.author.bot) return;
-
-        const logChannel = client.channels.cache.get(data.Logchannel);
-
+        const mongoDB = await settings.findOne({ Guild: message.guild.id });
+        if (!mongoDB.Logchannel || message.partial || message.system || message.author.bot) return;
+        
+        const logs = client.channels.cache.get(mongoDB.Logchannel);
         const embed = new MessageEmbed()
-            .setColor("#FF4C4C")
-            .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
+            .setColor("RED")
             .setTitle("Message deleted")
-            .addField("Channel:", message.channel)
+            .addField("Channel:", message.channelId)
             .addField("Content:", message.content)
             .setFooter(`Message ID: ${message.id}`)
             .setTimestamp()
-
-        logChannel.send(embed);
+        return logs.send({ embeds: [embed] });
     }
 };

@@ -2,11 +2,11 @@ const { MessageEmbed } = require("discord.js");
 const fetch = require("node-fetch");
 
 module.exports = {
-    name: "meme",
+    name: "wholesome",
     category: "fun",
     description: "sends a random cute image from Reddit",
     run: async (client, message) => {
-        const subreddits = ["memes", "dankmemes", "comedyheaven", "me_irl"];
+        const subreddits = ["wholesomememes", "wholesomegifs"];
         const selected = subreddits[Math.floor(Math.random() * subreddits.length)];
 
         const Reddit = await fetch(`https://www.reddit.com/r/${selected}/random/.json`);

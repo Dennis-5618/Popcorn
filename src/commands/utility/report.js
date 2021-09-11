@@ -3,23 +3,21 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: "report",
     category: "utility",
-    description: "Report a bug or error with Popcorn",
+    description: "reports an issue with Popcorn",
     run: async (client, message, args) => {
-        if (!args.length) return message.channel.send("Please also include something you want to report");
+        if (!args[0]) return message.channel.send("You also need to include something you want to report");
 
-        const reportChannel = message.guild.channels.cache.get("853229555144589322");
-        await reportChannel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setTitle("Report")
-            .setDescription(`
-        Author: \`${message.author.tag}\`
-        Report: \`${args.join(" ")}\``)
+        const guildEmbed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .setDescription(`Thank you for reporting your issue! Your report will be looked at shortly`)
+        message.channel.send({ embeds: [guildEmbed] });
+
+        const reportChannel = client.channels.cache.get("885948202422009907");
+        const reportEmbed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .addField("Author:", `\`${message.author.tag}\``)
+            .addField("Report:", `\`${args.join(" ")}\``)
             .setTimestamp()
-        );
-
-        return message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setDescription(`Thank you for reporting your issue! Your report has been sent and will be looked at shortly`)
-        );
+        reportChannel.send({ embeds: [reportEmbed] });
     }
 };

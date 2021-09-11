@@ -3,24 +3,21 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: "suggest",
     category: "utility",
-    description: "Suggest a command or feature for the bot",
+    description: "suggest a new command or feature to be added to Popcorn",
     run: async (client, message, args) => {
-        if (!args.length) return message.channel.send("Please also include a suggestion");
+        if (!args[0]) return message.channel.send("You also need to include something you want to suggest");
 
-        const channel = message.guild.channels.cache.get("853229507640426517");
-        await channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setTitle("Suggestion")
-            .setDescription(`
-        Author: \`${message.author.tag}\`
-        Suggestion: \`${args.join(" ")}\``)
-            .setFooter(`Author ID: ${message.author.id}`)
+        const guildEmbed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .setDescription("Thank you for your suggestion! Your suggestion will be looked at shortly");
+        message.channel.send({ embeds: [guildEmbed] });
+
+        const suggestionChannel = client.channels.cache.get("853229507640426517");
+        const suggestionEmbed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .addField("Author:", `\`${message.author.tag}\``)
+            .addField("Suggestion:", `\`${args.join(" ")}\``)
             .setTimestamp()
-        );
-
-        return message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setDescription("Thank you for your suggestion! I have sent it to my developer")
-        );
+        suggestionChannel.send({ embeds: [suggestionEmbed] });
     }
 };

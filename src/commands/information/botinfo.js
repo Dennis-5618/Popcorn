@@ -1,30 +1,24 @@
-const { MessageEmbed, version } = require("discord.js");
-const { MessageButton } = require("discord-buttons");
+const { MessageEmbed, version } = require("discord.js")
 
 module.exports = {
     name: "botinfo",
     category: "information",
-    description: "Shows some statistics of the bot",
+    description: "returns some statistics about Popcorn",
     run: async (client, message) => {
-        const Github = new MessageButton()
-            .setStyle("url")
-            .setLabel("Github repository")
-            .setURL("https://github.com/Dennis-5618/Popcorn")
-
         const embed = new MessageEmbed()
-            .setColor("#5865F2")
+            .setColor("BLURPLE")
             .setDescription(`
-    > **Bot information**
-    Prefix: \`p!\`
-    Server count: \`${client.guilds.cache.size.toLocaleString()}\`
-    User count: \`${client.users.cache.size.toLocaleString()}\`
-    Command count: \`${client.commands.size}\`
+            > **Bot information**
+            Prefix: \`p!\`
+            Shard count: \`${client.options.shardCount}\`
+            Server count: \`${client.guilds.cache.size.toLocaleString()}\`
+            Member count: \`${client.users.cache.size.toLocaleString()}\`
+            Command count: \`${client.commands.size}\`
 
-    > **System information**
-    Memory usage: \`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB\`
-    Discord.js version: \`v${version}\`
-    `)
-
-        message.channel.send({ embed, button: Github });
+            > **System information**
+            Memory usage: \`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB\`
+            Discord.js: \`v${version}\`
+            `)
+        return message.channel.send({ embeds: [embed] });
     }
 };

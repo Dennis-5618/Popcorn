@@ -1,30 +1,31 @@
-const { MessageEmbed } = require("discord.js")
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "help",
     aliases: ["h", "commands", "cmds"],
     category: "information",
-    description: "returns a list of all commands or information about a specific one",
+    description: "displays all available commands",
     run: async (client, message, args) => {
-        const Embed = new MessageEmbed().setColor("#5865F2");
 
-        if (!args.length) {
-            message.channel.send(Embed.setDescription(`
-                ${[...client.categories].map((value) =>
+        const embed = new MessageEmbed().setColor("BLURPLE");
+
+        if (!args[0]) {
+            embed.setDescription(` ${[...client.categories].map((value) =>
                 `${value[0].toUpperCase() + value.slice(1).toLowerCase()}
-                    ${client.commands
+                ${client.commands
                     .filter((cmd) => cmd.category == value.toLowerCase())
                     .map((value) => `\`${value.name}\``)
                     .join(", ")}`
-                ).join("\n\n")}
-            `));
+            ).join("\n\n")}
+            `)
+            return message.channel.send({ embeds: [embed] });
         } else {
             const Command = client.commands.get(args[0].toLowerCase()) || client.commands.get(client.aliases.get(args[0].toLowerCase()));
             if (!Command) return message.channel.send("I couldn't find that command, please try again");
 
             const Properties = Object.entries(Command);
 
-            message.channel.send(Embed
+            embed
                 .setTitle(Command.name[0].toUpperCase() + Command.name.slice(1).toLowerCase())
                 .setDescription(Properties.filter((value) => typeof value[1] != "function").map((value) => {
                     const Key = value[0][0].toUpperCase() + value[0].slice(1).toLowerCase();
@@ -34,7 +35,7 @@ module.exports = {
                         return `${Key}: \`${value[1]}\``
                     };
                 }))
-            );
+            message.channel.send({ embeds: [embed] });
         };
     }
 };

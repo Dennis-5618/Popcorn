@@ -3,16 +3,16 @@ const fetch = require("node-fetch");
 
 module.exports = {
     name: "yomama",
-    aliases: ["momjoke"],
+    aliases: ["momjoke", "urmom"],
     category: "fun",
-    description: "sends a random yo mama joke",
+    description: "returns a random yo mama joke",
     run: async (client, message) => {
         const { joke } = await fetch("http://api.yomomma.info/").then((res) => res.json());
 
-        message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
+        const embed = new MessageEmbed()
+            .setColor("BLURPLE")
             .setDescription(joke)
-            .setFooter("provided by: http://api.yomomma.info/")
-        );
+            .setFooter("Provided by: api.yomomma.info")
+        return message.channel.send({ embeds: [embed] });
     }
 };

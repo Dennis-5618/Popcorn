@@ -5,34 +5,31 @@ module.exports = {
     name: "give",
     aliases: ["donate", "pay"],
     category: "economy",
-    description: "gives a specified amount of coins to the mentioned user",
+    description: "give a specified amount of money to the mentioned user",
     run: async (client, message, args) => {
-        if (args[1] % 1 != 0 || args[1] <= 0) return message.channel.send("Please specify the amount of money you want to deposit as a valid number above 0");
+        if (args[1] % 1 != 0 || args[1] <= 0) return message.channel.send("You need to specify the amount of money you want to give");
 
-        const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!user) return message.channel.send("I couldn't find that user, please try again");
-        if (user.id == message.author.id) return message.channel.send("You cannot give yourself money");
+        const user = mesage.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        if (!user) return message.channel.send("I was unable to find that user, please try again");
+        if (user.id == message.author.id) return message.channel.send("You cannot give money to yourself");
 
         const author = await economy.findOne({ User: message.author.id });
-        if (!author) return message.channel.send("I couldn't find your wallet, please try again");
-        if (args[1] > author.Wallet) return message.channel.send("You don't have that much money in your wallet to give");
+        if (!author) return message.channel.send("I was unable to find your wallet, please try again");
+        if (args[1] > author.Wallet) return message.channel.send("You currently don't have that much money in your wallet");
 
         await economy.findOneAndUpdate({ User: message.author.id }, {
-            $inc: { Wallet: -args[1], Bank: 0 }
+            $inc: { Wallet: -args[1] }
         });
 
-        const member = await economy.findOne({ User: user.id });
-        if (!member) {
-            await economy.create({ User: user.id, Wallet: args[1], Bank: 0 });
-        } else {
-            await economy.findOneAndUpdate({ User: user.id }, {
-                $inc: { Wallet: args[1], Bank: 0 }
-            });
-        };
+        const toGive = await economy.findOne({ User: toGive.id });
+        if (!toGive) economy.create({ User: message.author.id, Wallet: args[1], Bank: 0, Inventory: [] });
+        economy.findOneAndUpdate({ User: toGive.id }, {
+            $inc: { Wallet: args[1] }
+        });
 
-        return message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setDescription(`You have successfully given $${args[1]} to ${user}`)
-        );
+        const embed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .setDescription(`${message.author} has given $${args[1]} to ${toGive}`)
+        return message.channel.send({ embeds: [embed] });
     }
 };

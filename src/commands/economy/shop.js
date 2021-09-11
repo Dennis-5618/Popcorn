@@ -1,16 +1,20 @@
 const { MessageEmbed } = require("discord.js");
-const shopItems = require("../../utils/shopItems");
+const shopItems = require("../../utils/shopItems")
 
 module.exports = {
     name: "shop",
     aliases: ["items"],
     category: "economy",
-    description: "shows the items that are up for sale",
+    description: "shows all items that are available for purchase",
     run: async (client, message) => {
-        const embed = new MessageEmbed().setColor("#5865F2").setTitle("Shop");
+        const embed = new MessageEmbed()
+        .setColor("BLURPLE")
+        .setTitle("Shop")
 
-        message.channel.send(shopItems.map((value) => {
-            return embed.addField(`${value.item} - $${value.price}`, `ID: \`${value.id}\``)
-        }));
+        shopItems.map(res => {
+            embed.addField(`${res.item} - $${res.price}`, `ID: \`${res.id}\``)
+        });
+
+        return message.channel.send({ embeds: [embed] });
     }
 };

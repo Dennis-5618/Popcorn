@@ -3,23 +3,25 @@ const warnings = require("../../schemas/warnings");
 
 module.exports = {
     name: "warns",
+    aliases: ["warnings"],
     category: "moderation",
-    description: "shows the amount of times someone has been warned",
+    description: "shows the amount of warnings you or the mentioned user has",
     run: async (client, message, args) => {
-        var Counter = 1;
-        const User = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!User) return message.channel.send("I couldn't find that user, please try again");
+        var counter = 1;
 
-        const Embed = new MessageEmbed().setColor("#5865F2");
+        const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.author;
+        if (!user) return message.channel.send("I was unable to find that user, please try again");
 
-        const Data = await warnings.findOne({ Guild: message.guild.id, Member: User.id });
-        if (!Data) return message.channel.send("That user doesn't have any warnings yet");
+        const data = await warnings.findOne({ Guild: message.guild.id, User: user.id });        
+        if (!data) return message.channel.send("That user doesn't have any warnings yet");
 
-        for (const info of Data.Reason) {
+        const embed = new MessageEmbed().setColor("BLURPLE");
+
+        for (const info of data.Reason) {
             const { Moderator, Reason } = info;
-            Embed.addField(`${Counter++}.`, `Moderator: ${client.users.cache.get(Moderator)}\n Reason: \`${Reason}\``)
+            embed.addField(`${counter++}.`, `Moderator: ${client.users.cache.get(Moderator)} \nReason: \`${Reason}\``)
         };
 
-        message.channel.send(Embed.setFooter(`Total about of warnings: ${Data.Reason.length}`));
+        return message.channel.send({ embeds: [embed] });
     }
 };

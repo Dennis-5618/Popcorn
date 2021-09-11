@@ -3,35 +3,36 @@ const warnings = require("../../schemas/warnings");
 
 module.exports = {
     name: "warn",
+    aliases: ["warning"],
     category: "moderation",
-    description: "warns the mentioned member with the specified reason",
+    description: "gives the mentioned user a warning with a specified reason",
     userPermissions: ["MANAGE_MESSAGES"],
     run: async (client, message, args) => {
-        const Reason = args.slice(1).join(" ") || "No reason specified";
-        const User = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!User) return message.channel.send("I couldn't find that user, please try again");
-        if (User.owner) return message.channel.send("You are unable to warn the owner of this server");
-        if (User.id == message.author.id) return message.channel.send("You cannot warn yourself");
+        const reason = args.slice(1).join(" ") || "There was no reason specified";
+        const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        if (!user) return message.channel.send("I was unable to find that user, please try again");
+        if (user.owner) return message.channel.send("You cannot warn the owner if this server");
+        if (user.id == message.author.id) return message.channel.send("You cannot warn yourself");
 
-        await warnings.updateOne({ Guild: message.guild.id, Member: User.id }, {
+        await warnings.updateOne({ guild: message.guild.id, user: user.id }, {
             $push: {
-                Reason: [{
-                    Moderator: message.author.id,
-                    Reason
+                reason: [{
+                    moderator: message.author.id,
+                    reason: reason
                 }]
             }
         }, { upsert: true });
 
-        User.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setDescription(`You have been warned in ${message.guild.name} by ${message.author} \nReason: \`${Reason}\``)
-        );
+        const userEmbed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .setDescription(`You have been given a warning in ${message.guild.name} \nReason: \`${reason}\``)
+        await user.send({ embeds: [userEmbed] }).catch(() => null);
 
-        return message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .addField("Warned user:", User.user.tag, true)
+        const guildEmbed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .addField("Warned user:", user.user.tag, true)
             .addField("Warned by:", message.author.tag, true)
-            .addField("Reason:" `\`${Reason}\``)
-        );
+            .addField("Reason:", `\`${reason}\``)
+        return message.channel.send({ embeds: [guildEmbed] });
     }
 };

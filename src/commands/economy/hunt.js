@@ -4,23 +4,23 @@ const economy = require("../../schemas/economy");
 module.exports = {
     name: "hunt",
     category: "economy",
-    description: "go hunt for some animals with your hunting rifle",
-    cooldown: 15 * 60 * 1000,
+    description: "use your hunting rifle and hunt for some animals",
+    cooldown: 2700000, // 45 minutes
     run: async (client, message) => {
         const data = await economy.findOne({ User: message.author.id });
-        if (!data) return message.channel.send("I couldn't find your inventory, please try again");
+        if (!data) return message.channel.send("I was unable to find your inventory, please try again");
 
-        const huntingRifle = Object.keys(data.userInventory).includes("rifle");
-        if (!huntingRifle) return message.channel.send("You need to have a hunting rifle in order to be able to hunt");
+        const rifle = Object.keys(data.Inventory).includes("rifle");
+        if (!rifle) return message.channel.send("You need to buy a hunting rifle before you can hunt");
 
         const money = Math.floor(Math.random() * 500) + 1;
-        await economy.findOneAndUpdate({ User: message.author.id }, {
+        const embed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .setDescription(`You have gathered a total of $${money} worth of animals`)
+        message.channel.send({ embeds: [embed] });
+
+        await economy.findOneAndUpdate({ user: message.author.id }, {
             $inc: { Wallet: money }
         });
-
-        return message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setDescription(`You've spent all day hunting and have sold everything for $${money}`)
-        );
     }
 };

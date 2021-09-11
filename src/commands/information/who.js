@@ -1,27 +1,28 @@
 const { MessageEmbed } = require("discord.js");
+const ms = require("ms");
 
 module.exports = {
     name: "who",
-    aliases: ["whois", "userinfo"],
+    aliases: ["whois", "userinfo", "userinformation"],
     category: "information",
-    description: "sends information about yourself or the mentioned users account",
-    run: async (client, message) => {
-        const User = message.mentions.members.first() || message.guild.members.cache.get(message.author.id);
-        const Roles = User.roles.cache.sort((a, b) => b.position - a.position).map(r => r.toString()).slice(0, -1);
+    description: "returns information about your or a mentioned users account",
+    run: async (client, message, args) => {
+        const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.get(message.author.id);
 
-        return message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setThumbnail(User.user.avatarURL({ dynamic: true, size: 512 }))
+        const embed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .setThumbnail(user.user.avatarURL({ dynamic: true, size: 512 }))
             .setDescription(`
             > **User information**
-            Username: \`${User.user.tag}\`
-            ID: \`${User.id}\`
-            Avatar: [click here](${User.user.avatarURL({ dynamic: true })})
-
+            Username: \`${user.user.tag}\`
+            ID: \`${user.id}\`
+            Flags: \`${user.user.flags.toArray()}\`
+            Joined: \`${ms((new Date - user.joinedTimestamp), { long: true})} ago\`
+            
             > **Role information**
-            Highest role: ${User.roles.highest.id == message.guild.id ? "none" : User.roles.highest.name}
-            All roles: ${Roles.join(", ")}
+            Highest role: ${user.roles.highest.id == message.guild.id ? "none" : user.roles.highest}
+            All roles: ${user.roles.cache.sort((a, b) => b.position - a.position).map(r => r.toString()).slice(0, -1).join(", ")}
             `)
-        );
+        return message.channel.send({ embeds: [embed] });
     }
 };

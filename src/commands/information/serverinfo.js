@@ -4,30 +4,27 @@ module.exports = {
     name: "serverinfo",
     aliases: ["guildinfo"],
     category: "information",
-    description: "sends some information about the current server",
+    description: "returns some information about the current server",
     run: async (client, message) => {
-        const emojis = message.guild.emojis.cache;
-        const channels = message.guild.channels.cache;
-        const roles = message.guild.roles.cache.sort((a, b) => b.position = a.position).map(r => r.toString());
-        const verificationLevel = { NONE: "none", LOW: "low", MEDIUM: "medium", HIGH: "high", VERY_HIGH: "very high" };
-
-        message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
+        const embed = new MessageEmbed()
+            .setColor("BLURPLE")
             .setThumbnail(message.guild.iconURL({ dynamic: true }))
             .setDescription(`
             > **General information**
             Name: \`${message.guild.name}\`
             ID: \`${message.guild.id}\`
-            Owner: \`${message.guild.owner.user.tag}\`
+            Owner: \`${message.guild.members.cache.get(message.guild.ownerId).user.tag}\`
             Region: \`${message.guild.region}\`
-            Boost level: \`${message.guild.premiumTier ? `tier: ${message.guild.premiumTier}` : "none"}\`
-            Verification level: \`${verificationLevel[message.guild.verificationLevel]}\`
-
-            > **Channels & roles**
-            Total channels: \`${channels.size}\`
-            Text channels: \`${channels.filter(ch => ch.type == "text").size}\`
-            Voice channels: \`${channels.filter(ch => ch.type == "voice").size}\`
-            Roles: \`${roles.length}\`
+            Boost level: \`${message.guild.premiumTier}\`
+            Boost count: \`${message.guild.premiumSubscriptionCount}\`
+            Verification level: \`${message.guild.verificationLevel}\`
+            
+            > **Roles and channels**
+            Roles: \`${(message.guild.roles.cache.sort((a, b) => b.position = a.position).map(r => r.toString())).length}\`
+            Total channels: \`${message.guild.channels.cache.size}\`
+            Categories: \`${message.guild.channels.cache.filter(ch => ch.type == "GUILD_CATEGORY").size}\`
+            Text channels: \`${message.guild.channels.cache.filter(ch => ch.type == "GUILD_TEXT").size}\`
+            Voice channels: \`${message.guild.channels.cache.filter(ch => ch.type == "GUILD_VOICE").size}\`
 
             > **Members**
             Total members: \`${message.guild.memberCount}\`
@@ -35,10 +32,10 @@ module.exports = {
             Bots: \`${message.guild.members.cache.filter(m => m.user.bot).size}\`
 
             > **Emojis**
-            Standard emojis: \`${emojis.filter(e => !e.animated).size}\`
-            Animated emojis: \`${emojis.filter(e => e.animated).size}\`
+            Total emojis: \`${message.guild.emojis.cache.size}\`
+            Standard emojis: \`${message.guild.emojis.cache.filter(e => !e.animated).size}\`
+            Animated emojis: \`${message.guild.emojis.cache.filter(e => e.animated).size}\`
             `)
-            .setFooter(`Server creation date: ${new Date(message.guild.createdTimestamp)}`)
-        );
+        return message.channel.send({ embeds: [embed] });
     }
 };

@@ -1,26 +1,24 @@
 const { MessageEmbed } = require("discord.js");
-const settings = require("../../schemas/settings");
 
 module.exports = {
     name: "guildBanRemove",
     run: async (client, guild) => {
-        const data = await settings.findOne({ Guild: guild.id });
-        if (!data) return;
+        const mongoDB = await settings.findOne({ Guild: guild.guild.id });
+        if (!mongoDB.Logchannel) return;
 
-        const logChannel = client.channels.cache.get(data.Logchannel);
-
-        const fetchedAudit = await guild.fetchAuditLogs({ type: "MEMBER_BAN_ADD", limit: 1 });
+        const fetchedAudit = await guild.fetchAuditLogs({ type: "MEMBER_BAN_REMOVE", limit: 1 });
         const audit = fetchedAudit.entries.first();
 
         const { executor, target, reason } = audit;
 
-        logChannel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setTitle("Unbanned member")
+        const logs = client.channels.cache.get(mongoDB.Logchannel);
+        const embed = new MessageEmbed()
+            .setColor("GREEN")
+            .setTitle("Member banned")
             .addField("Unbanned user:", target, true)
             .addField("Unbanned by:", executor, true)
-            .addField("Reason:", reason || "No reason specified")
+            .addField("Reason", reason || "No reason has been specified")
             .setTimestamp()
-        );
+        return logs.send({ embeds: [embed] });
     }
 };

@@ -2,37 +2,31 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "ban",
+    aliases: ["banish"],
     category: "moderation",
-    description: "bans the mentioned user from the server with the specified reason",
+    description: "ban the mentioned user from the server with specified reason",
     userPermissions: ["BAN_MEMBERS"],
     botPermissions: ["BAN_MEMBERS"],
     run: async (client, message, args) => {
-        const Reason = args.slice(1).join(" ") || "No reason specified";
-        const User = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!User) return message.channel.send("I couldn't find that user, please mention the user or provide their ID");
+        const reason = args.slice(1).join(" ") || "There was no reason specified";
+        const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        if (!user) return message.channel.send("I was unable to find that user, please try again");
 
-        if (!args.length) return message.channel.send("Please specify who you want to ban by mentioning them or providing their ID");
+        if ((message.member.roles.highest.position <= user.roles.highest.position) && message.guild.ownerId != message.author) return message.channel.send("You are unable to ban that user due to the role hierarchy");
+        if (message.guild.me.roles.highest.position <= user.roles.highest.position) return message.channel.send("I am unable to ban that user due to the role hierarchy");
 
-        if ((message.member.roles.highest.position <= User.roles.highest.position) && message.guild.ownerID != message.author) return message.channel.send("You are unable to ban the mentioned member due to the role hierarchy");
-        if (message.guild.me.roles.highest.position <= User.roles.highest.position) return message.channel.send("I am unable to ban the mentioned member due to the role hierarchy");
+        const userEmbed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .setDescription(`You have been banned from \`${message.guild.name}\` \nReason: \`${reason}\``)
+        await user.send({ embeds: [userEmbed] }).catch(() => null);
 
-        try {
-            await User.send(new MessageEmbed()
-                .setColor("#5865F2")
-                .setDescription(`You have been banned from \`${message.guild.name}\` \nReason: \`${Reason}\``)
-            ).catch(() => null);
+        const guildEmbed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .addField("Banned user:", user.user.tag, true)
+            .addField("Banned by:", message.author.tag, true)
+            .addField("Reason:", `\`${reason}\``)
+        message.channel.send({ embeds: [guildEmbed] });
 
-            await message.channel.send(new MessageEmbed()
-                .setColor("#5865F2")
-                .addField("Banned user:", User.user.tag, true)
-                .addField("Banned by:", message.author.tag, true)
-                .addField("Reason:", `\`${Reason}\``)
-            );
-
-            return message.guild.members.ban(User.id, { reason: Reason, days: 7 });
-
-        } catch {
-            message.channel.send("An error has occured while trying to ban the mentioned user, please try again")
-        };
+        return message.guild.members.ban(user.id, { reason, days: 7 });
     }
 };

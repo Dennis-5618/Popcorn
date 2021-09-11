@@ -1,21 +1,21 @@
 const { MessageEmbed } = require("discord.js");
-const settings = require("../../schemas/settings")
+const settings = require("../../schemas/settings");
 
 module.exports = {
     name: "channelCreate",
     run: async (client, data) => {
-        const database = await settings.findOne({ Guild: data.guild.id });
-        if (!database) return;
+        const mongoDB = await settings.findOne({ Guild: data.guild.id });
+        if (!mongoDB.Logchannel) return;
 
-        const logChannel = data.guild.channels.cache.get(database.Logchannel);
-        logChannel.send(new MessageEmbed()
-            .setColor("#2ecc71")
+        const logs = client.channels.cache.get(mongoDB.Logchannel);
+        const embed = new MessageEmbed()
+            .setColor("GREEN")
             .setAuthor(data.guild.name, data.guild.iconURL({ dynamic: true }))
-            .setTitle("Channel created")
+            .setTitle("New channel created")
             .addField("Name:", data.name)
             .addField("Type:", data.type)
             .setFooter(`Channel ID: ${data.id}`)
             .setTimestamp()
-        );
+        logs.send({ embeds: [embed] });
     }
 };

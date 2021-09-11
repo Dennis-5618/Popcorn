@@ -3,19 +3,19 @@ const economy = require("../../schemas/economy");
 
 module.exports = {
     name: "work",
+    aliases: ["aliases"],
     category: "economy",
-    description: "gets you some money, can only be used once per 30 minutes",
-    cooldown: 30 * 60 * 1000,
+    description: "description",
+    cooldown: 1800000, // 30 minutes
     run: async (client, message) => {
-        const money = Math.floor(Math.random() * 100) + 1;
+        const money = Math.floor(Math.random() * 150) + 1;
+        const embed = new MessageEmbed()
+            .setColor("BLURPLE")
+            .setDescription(`You were paid $${money} for your work`)
+        message.channel.send({ embeds: [embed] });
 
         await economy.findOneAndUpdate({ User: message.author.id }, {
             $inc: { Wallet: money }
         });
-
-        message.channel.send(new MessageEmbed()
-            .setColor("#5865F2")
-            .setDescription(`You have worked tirelessly the entire day, here is $${money} for your hard work`)
-        );
     }
 };
