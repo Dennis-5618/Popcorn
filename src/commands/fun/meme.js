@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 module.exports = {
     name: "meme",
     category: "fun",
-    description: "sends a random cute image from Reddit",
+    description: "sends a random meme from Reddit",
     run: async (client, message) => {
         const subreddits = ["memes", "dankmemes", "comedyheaven", "me_irl"];
         const selected = subreddits[Math.floor(Math.random() * subreddits.length)];

@@ -14,11 +14,11 @@ module.exports = {
         if (user.owner) return message.channel.send("You cannot warn the owner if this server");
         if (user.id == message.author.id) return message.channel.send("You cannot warn yourself");
 
-        await warnings.updateOne({ guild: message.guild.id, user: user.id }, {
+        await warnings.updateOne({ Guild: message.guild.id, User: user.id }, {
             $push: {
-                reason: [{
-                    moderator: message.author.id,
-                    reason: reason
+                Reason: [{
+                    Moderator: message.author.id,
+                    Reason: reason
                 }]
             }
         }, { upsert: true });
