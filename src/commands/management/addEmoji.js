@@ -1,8 +1,8 @@
 const { Util, MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: "steal",
-    aliases: ["aliases"],
+    name: "addemoji",
+    aliases: ["steal"],
     category: "utility",
     description: "adds the specified emojis to the server",
     userPermissions: ["MANAGE_GUILD"],

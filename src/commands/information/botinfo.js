@@ -1,4 +1,5 @@
-const { MessageEmbed, version } = require("discord.js")
+const { MessageEmbed, version } = require("discord.js");
+const ms = require("ms");
 
 module.exports = {
     name: "botinfo",
@@ -17,8 +18,10 @@ module.exports = {
 
             > **System information**
             Memory usage: \`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB\`
+            Uptime: \`${ms(client.uptime, { long: true })}\`
             Discord.js: \`v${version}\`
-            `)
+            `);
+
         return message.channel.send({ embeds: [embed] });
     }
 };
