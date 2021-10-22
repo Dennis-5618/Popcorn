@@ -26,17 +26,17 @@ Below you can read some of the features that are being worked on and will be add
 ### Requirements
 * [Discord bot token](https://discord.com/developers/applications)
 * [MongoDB token](https://www.mongodb.com/)
-* [Node.js V14 or newer](https://nodejs.org/en/)
+* [Node.js V16 or newer](https://nodejs.org/en/)
 #### **Never share your Discord bot token or MongoDB token as those are the login details to your bot and database**
 
 ### Packages used
 * [discord.js](https://github.com/discordjs/discord.js)
-* [discord-buttons](https://github.com/AngeloCore/discord-buttons)
 * [node-glob](https://github.com/isaacs/node-glob)
 * [ms](https://github.com/vercel/ms)
 * [mongoose](https://github.com/Automattic/mongoose)
 * [node-fetch](https://github.com/node-fetch/node-fetch)
 * [@topgg-sdk](https://github.com/top-gg/node-sdk)
+* [@iamtraction/google-translate](https://github.com/iamtraction/google-translate)
 
 Use `npm i [package name]` or `yarn add [package name]` to install
 
