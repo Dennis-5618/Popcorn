@@ -11,6 +11,7 @@ module.exports = {
         const embed = new MessageEmbed()
             .setColor("RED")
             .setTitle("Message updated")
+            .addField("Author", `${message.author.tag} (${message.author.id})`)
             .addField("Channel:", message.channelId)
             .addField("Before", oldMessage.content)
             .addField("After:", newMessage.content)
