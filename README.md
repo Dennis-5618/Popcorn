@@ -30,6 +30,10 @@
 * [@topgg-sdk](https://github.com/top-gg/node-sdk)
 * [@iamtraction/google-translate](https://github.com/iamtraction/google-translate)
 
+### Easily install all packages:
+yarn: `yarn add discord.js node-glob ms mongoose node-fetch @top-gg/sdk @iamtraction/google-translate`
+npm: `npm i discord.js node-glob ms mongoose node-fetch @top-gg/sdk @iamtraction/google-translate`
+
 ## Step 1:
 Go to the Discord developer dashboard and create a new application, next go to the tab called 'bot' and copy the token from that page.
 
